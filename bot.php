@@ -1,25 +1,4 @@
 <?php
-/*
-$i = 1;
-while(true){
-$g = get("https://resep.place.eu.org/?wp_automatic=cron&id=2237");
-$x = ex('" href="https://resep.place.eu.org/',"/a>",1,$g);
-$x = ex('/">',"<",1,$x);
-$gg = get("https://tribun.place.eu.org/?wp_automatic=cron&id=223");
-$xx = ex('" href="https://tribun.place.eu.org/',"/a>",1,$gg);
-$xx = ex('/">',"<",1,$xx);
-if(file_put_contents("x",$x)){
-$xx = file_get_contents("x");
-echo "[$i] $x \n";
-}else{
-echo "[$i] \n";
-}
-$i++;
-//if(!$x){ exit; }
-}
-exit;
-*/
-
 
 $host = "https://185.231.223.76/";
 //anime
@@ -77,9 +56,8 @@ exit;
 
 
 function save($x,$ss){
-$n = "$x.html";
+$n = "anime/$x.html";
 if(!file_exists($n)){
-  
 if(file_put_contents($n,$ss)){
   echo " sukses Save \n";
 }else{
@@ -88,40 +66,6 @@ if(file_put_contents($n,$ss)){
 }else{
   echo " Sudah Ada \n";}
 }
-
-
-function artikel($host){
-$js = get($host);
-$des = ex('itemprop="description">',"</p>",1,$js)."</p>";
-$img = "<img ".ex("<noscript><img","</",1,$js);
-$kat = ex('" data-title="','"',1,$js);
-$js = ex("var episodelist = ","];",1,$js)."]";
-$js = json_decode($js,1);
-foreach($js as $x){
-$no = $x["ep-num"];
-$jdl = $x["ep-title"];
-$url = $x["ep-link"];
-$ll = explode("/",$url)[3];
-//if(file_exists("anime/2/$ll.html")){ echo " Sudah Ada \n"; continue;}
-$c = get($url);
-$fhash = ex('var fhash  = "','"',1,$c);
-$frame = '<iframe class="lockiframe" style="position: relative;" src="https://gugcloud.club/vapi.php?id='.$fhash.'" FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH="100%" HEIGHT="50%" allowfullscreen="true"></iframe>';
-$ads = 'https://navigablepiercing.com/v0zcf66cu?key=fa8b1b24e7bcb8e0935581769d593d5c';
-$ss = "
-<div class='anim'>
-<center> $img <br><br>
-<h2> $jdl </h2>
-$frame <br><br>
-<p><span> $kat </span> </p><br>
-<p>$des <br>
-<a href='$ads' > Download Now </a> <br>
-</p>
-</center>
-</div>
-";
-save($ss,$ll);
-}}
-
 
 
 function get($url){
